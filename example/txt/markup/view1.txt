@@ -1,0 +1,22 @@
+===== first-page-tmpl
+<ul>
+  {{listitems}}
+    <li class="desc-a">
+      {{title}}
+      <div class="arrow"></div>
+    </li>
+  {{/listitems}}
+</ul>
+
+===== second-page-tmpl
+ <header class="header">
+    <div class="back-button"></div>
+  </header>
+  <div class="scroller">
+    <div id="second-page-content" class="content">
+      <h2 class="desc-c">{{details_msg}}</h2>
+      <p>
+        {{text}}
+      </p>
+    </div>
+  </div>
