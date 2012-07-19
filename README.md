@@ -1,3 +1,5 @@
+NOTE - This version of the SDK has not been released yet, as it has updated version of the bc.ui.forwardPage and bc.ui.backPage, which takes in an optional parameter for how long the transition should take.
+
 Overview
 =================
 
