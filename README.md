@@ -38,5 +38,5 @@ In the example directory you will find a working App Cloud template that uses Ap
 Credits and thanks
 =================
 
-Eric Hynds
-Brice Stacey
+* Eric Hynds
+* Brice Stacey
