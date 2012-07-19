@@ -11,7 +11,9 @@
       ArticleCollection,
       ArticleListView,
       ArticleView;
-      
+   
+
+   
   //Models
   Article = Backbone.Model.extend({});
   
@@ -21,7 +23,9 @@
       
       contentFeed: "4f3d8592b3d99278ed015beb",
       
+      //Gets the data out as any array for markup to use.  Could also right custom parse function.
       getMarkupData: function() {
+        
         var ret = [];
           for( var i = 0, len = this.models.length; i < len; i++ ) {
             ret.push( this.models[i].attributes );
@@ -52,6 +56,7 @@
     
     render: function () {
       //The object we will pass to markup that will be used to generate the HTML.
+      
       var context = { "listitems": this.model.getMarkupData() };
 
       //The SDK automatically parses any templates you associate with this view on the bc.templates object.
@@ -66,14 +71,11 @@
     },
     
     showDetails: function( evt ) {
-      App.navigate( "article/1", { trigger: true } );
-      //bc.ui.forwardPage( $( "#pagetwo" ), { transitionTime: 300 } );
+      App.navigate( "article/" + $( evt.currentTarget ).index(), { trigger: true } );
     }
     
   });
-  
-  
-  
+   
   ArticleView = Backbone.View.extend({
     
     el: '#pagetwo',
@@ -114,27 +116,22 @@
           "":"list",
           "article/:id":"details"
       },
-
+      
+      //our default landing page.  This is just the list of articles.
       list: function () {
         this.articleListView = new ArticleListView( { model:this.articles } );
       },
 
-      details: function (id) {
-        this.currentArticle = id;
-        this.showDetails();
-      },
-      
-      showDetails: function () {
-        var deepLinked = ( this.articleListView === undefined );
-        var transitionTime = ( deepLinked ) ? 1 : 300;
+      //The details page for a given article.
+      details: function (id ) {
+        var deepLinked = ( this.articleListView === undefined ),
+            transitionTime = ( deepLinked ) ? 1 : 300;
         
-        this.detailsView = new ArticleView( { model: this.articles.at( this.currentArticle ), deepLinked: deepLinked } );
+        this.detailsView = new ArticleView( { model: this.articles.at( id ), deepLinked: deepLinked } );
         
-        //Happy for better suggestions here.
-        this.views++;
-        $( "body" ).append( this.detailsView.render().el );
+        this.detailsView.render();
         bc.ui.forwardPage( $( "#pagetwo" ), { transitionTime: transitionTime } );
-      }
+      },
   
   });
 
